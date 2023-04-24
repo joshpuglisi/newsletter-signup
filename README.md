@@ -13,7 +13,7 @@ Languages used in this project:
 <ul>
 <li>CSS</li>
 <li>HTML5</li>
-<li>JavaScript<li>
+<li>JavaScript</li>
 </ul>
 <br>
 Created on 24.04.2023
