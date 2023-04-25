@@ -5,8 +5,8 @@ const https = require("https");
 
 const app = express();
 
-app.use(bodyParser.urlencoded({extended:true}));
-app.use(express.static("public"));
+app.use(bodyParser.urlencoded({extended:true})); //enable body parser
+app.use(express.static("public")); //to include the static files in the public folder
 
 //load the html
 app.get("/", function(req,res){
@@ -19,6 +19,7 @@ app.post("/", function(req,res){
     const name2 = req.body.lastName;
     const email = req.body.email;
 
+    //construct data to be sent to mailchimp server, see the bottom 2 lines of code of this function
     const data = {
         members: [
             {
@@ -32,9 +33,9 @@ app.post("/", function(req,res){
         ]
     }
 
-    const urlChimp = "https://us8.api.mailchimp.com/3.0/lists/d7436e41ee"
-
     const jsonData = JSON.stringify(data);
+    
+    const urlChimp = "https://us8.api.mailchimp.com/3.0/lists/d7436e41ee"
 
     const option = {
         method: "POST",
@@ -43,7 +44,7 @@ app.post("/", function(req,res){
 
     //make a request to the MailChimp Server using the credentials above
     const request = https.request(urlChimp, option, function(response){
-        console.log(response.statusCode);
+        console.log(response.statusCode);//print status code
         if(response.statusCode === 200){
             res.sendFile(__dirname + "/success.html"); //if success, load the success.html
         } else {
